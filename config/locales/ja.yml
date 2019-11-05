@@ -9,7 +9,7 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       task: タスク
-    attribute:
+    attributes:
       task:
         id: ID
         name: 名称
