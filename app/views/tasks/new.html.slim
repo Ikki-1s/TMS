@@ -10,4 +10,13 @@ h1 タスクの新規登録
   .form-group
     = f.label :description
     = f.text_area :description, rows: 5, class: 'form-control', id: 'task_description'
+  .form-group
+    = f.label :status
+    = f.text_field :status, class: 'form-control', id: 'task_status'
+  .form-group
+    = f.label :deadline
+    = f.text_field :deadline, class: 'form-control', id: 'task_deadline'
+  .form-group
+    = f.label :priority
+    = f.text_field :priority, class: 'form-control', id: 'task_priority'
   =f.submit nil, class: 'btn btn-primary'
