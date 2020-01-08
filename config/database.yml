@@ -22,9 +22,9 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   
   # for Circle CI
-  username: postgres
-  password: 
-  host: <%= ENV['POSTGRES_HOST'] %>
+   # username: postgres
+   # password: 
+   # host: <%= ENV['POSTGRES_HOST'] %>
 
 development:
   <<: *default
