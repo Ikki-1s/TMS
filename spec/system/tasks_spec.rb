@@ -4,6 +4,7 @@ describe 'タスク管理機能', type: :system do
     let(:user_a) { FactoryBot.create(:admin_user, name: 'ユーザーA', email: 'a@example.com') }
     let(:user_b) { FactoryBot.create(:admin_user, name: 'ユーザーB', email: 'b@example.com') }
     let!(:task_a) { FactoryBot.create(:task, name: '最初のタスク', user: user_a) }
+    let!(:task_b) { FactoryBot.create(:task, name: '2番目のタスク', user: user_a, created_at: Time.current + 1.days) }
 
     before do
       visit login_path
@@ -20,7 +21,6 @@ describe 'タスク管理機能', type: :system do
     context 'ユーザーAがログインしているとき' do
       let(:login_user) { user_a }
 
-
       # 作成済みのタスクの名称が画面上に表示されていることを確認
       it_behaves_like 'ユーザーAが作成したタスクが表示される' 
     end
@@ -31,6 +31,16 @@ describe 'タスク管理機能', type: :system do
       it 'ユーザーAが作成したタスクが表示されない' do
         # ユーザーAが作成したタスクの名称が画面上に表示されていないことを確認
         expect(page).to have_no_content '最初のタスク'
+      end
+    end
+
+    context '複数のタスクを作成したとき' do
+      let(:login_user) { user_a }
+
+      it 'タスクが登録日時の降順で並んでいることを確認' do
+        task_list = all('tbody tr')
+        expect(task_list[0]).to have_content '2番目のタスク'
+        expect(task_list[1]).to have_content '最初のタスク'
       end
     end
   end
